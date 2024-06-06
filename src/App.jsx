@@ -5,8 +5,6 @@ import Navbar from './components/Navbar'
 import { LaunchStatusProvider } from './utils/LaunchContext'
 
 function App() {
-  
-
   return (
     <LaunchStatusProvider>
      <Navbar />
