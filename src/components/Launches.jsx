@@ -81,7 +81,6 @@ const Launches = () => {
   });
 
   const paginatedLaunches = filteredLaunches.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-  console.log(paginatedLaunches);
   return (
     <div className="mt-3 items-center font-semibold">
       <Paper sx={{ width: "90%", marginLeft: "6%", marginBottom: "5%" }}>
