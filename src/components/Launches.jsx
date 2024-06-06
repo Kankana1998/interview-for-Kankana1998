@@ -87,8 +87,8 @@ const Launches = () => {
       <Paper sx={{ width: "90%", marginLeft: "6%", marginBottom: "5%" }}>
         <TableContainer>
           <Table>
-            <TableHead className="bg-gray-300">
-              <TableRow className="">
+            <TableHead className="bg-gray-300 font-semibold">
+              <TableRow>
                 {columns.map((column) => (
                   <TableCell key={column.id}>{column.name}</TableCell>
                 ))}
@@ -104,7 +104,7 @@ const Launches = () => {
               ) : (
                 paginatedLaunches.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={7} align="center">
+                    <TableCell colSpan={7} align="center" sx={{fontSize: '1.2rem'}}>
                       No Data Found for the specific filter
                     </TableCell>
                   </TableRow>

@@ -6,10 +6,11 @@ import { LaunchStatusContext } from '../utils/LaunchContext';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { subWeeks, subMonths, subYears } from 'date-fns';
+import Tooltip from '@mui/material/Tooltip';
 
 const FilterSection = () => {
   const launches = ['All Launches', 'Upcoming Launches', 'Successful Launches', 'Failed Launches'];
-  const { selectedLaunchStatus, handleStatusChange, selectedDateRange, handleDateRangeChange } = useContext(LaunchStatusContext); 
+  const { selectedLaunchStatus, handleStatusChange, selectedDateRange, handleDateRangeChange } = useContext(LaunchStatusContext);
   const [open, setOpen] = useState(false);
   const dateRangeRef = useRef(null);
 
@@ -23,8 +24,17 @@ const FilterSection = () => {
   ];
 
   const customStaticRanges = createStaticRanges(
-    presetRanges.map(preset => ({
-      label: preset.label,
+    presetRanges.map((preset, index) => ({
+      label: (
+        <Tooltip
+          title={`${preset.range.startDate.toLocaleDateString()} - ${preset.range.endDate.toLocaleDateString()}`}
+          arrow
+          placement="top"
+          key={index}
+        >
+          <span>{preset.label}</span>
+        </Tooltip>
+      ),
       range: () => preset.range,
     }))
   );
@@ -47,8 +57,14 @@ const FilterSection = () => {
     setOpen(!open);
   };
 
+  const handleDateRangeChangeWithClose = (ranges) => {
+    handleDateRangeChange(ranges);
+    setOpen(false); // Close the Date Range Picker after selecting a date range
+  };
+
   const handleRemoveDateRange = () => {
     handleDateRangeChange({ selection: null });
+    setOpen(false); // Close the Date Range Picker when clearing the date range
   };
 
   return (
@@ -68,7 +84,7 @@ const FilterSection = () => {
           <div className="absolute z-10 mt-2 bg-white shadow-lg border rounded-lg p-4">
             <DateRangePicker
               ranges={[{ startDate: selectedDateRange?.startDate || new Date(), endDate: selectedDateRange?.endDate || new Date(), key: 'selection' }]}
-              onChange={handleDateRangeChange}
+              onChange={handleDateRangeChangeWithClose}
               className="date-range-picker"
               months={2}
               direction="horizontal"
