@@ -81,7 +81,7 @@ const Launches = () => {
   });
 
   const paginatedLaunches = filteredLaunches.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
-
+  console.log(paginatedLaunches);
   return (
     <div className="mt-3 items-center font-semibold">
       <Paper sx={{ width: "90%", marginLeft: "6%", marginBottom: "5%" }}>
@@ -90,7 +90,7 @@ const Launches = () => {
             <TableHead className="bg-gray-300 font-semibold">
               <TableRow>
                 {columns.map((column) => (
-                  <TableCell key={column.id}>{column.name}</TableCell>
+                  <TableCell key={column.id} sx={{ fontWeight: 'bold', backgroundColor: '#f5f5f5', fontSize: '1rem', color: '#333' }}>{column.name}</TableCell>
                 ))}
               </TableRow>
             </TableHead>
@@ -104,13 +104,19 @@ const Launches = () => {
               ) : (
                 paginatedLaunches.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={7} align="center" sx={{fontSize: '1.2rem'}}>
+                    <TableCell colSpan={columns.length} align="center" sx={{fontSize: '1.2rem'}}>
                       No Data Found for the specific filter
                     </TableCell>
                   </TableRow>
                 ) : (
                   paginatedLaunches.map((item, index) => (
-                    <TableRow key={index} onClick={() => handleRowClick(item)} style={{ cursor: 'pointer' }}>
+                    <TableRow key={index} onClick={() => handleRowClick(item)}  sx={{
+                      cursor: 'pointer',
+                      fontSize: '1.2rem',
+                      '&:hover': {
+                        backgroundColor: '#f0f0f0',
+                      },
+                    }}>
                       <TableCell>{item.flight_number}</TableCell>
                       <TableCell>{new Date(item.date_utc).toLocaleString()}</TableCell>
                       <TableCell>{item.launchpad_name}</TableCell>
