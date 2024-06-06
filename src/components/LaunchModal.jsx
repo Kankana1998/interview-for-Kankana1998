@@ -18,7 +18,6 @@ const modalStyle = {
 
 const LaunchModal = ({ open, handleClose, launch }) => {
   if (!launch) return null;
-
   const success = launch.success;
   const upcoming = launch.upcoming;
   const status = upcoming ? "Upcoming" : success ? "Success" : "Failed";

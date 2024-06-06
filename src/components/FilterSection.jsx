@@ -71,7 +71,7 @@ const FilterSection = () => {
     <div className="w-[90%] mt-4 flex flex-wrap justify-between items-center relative">
       <div className="sm:w-auto mb-2 sm:mb-0 mr-2 sm:mr-4 ml-[10%] relative" ref={dateRangeRef}>
         <div className="flex items-center">
-          <button onClick={toggleOpen} className="border border-xl p-4 rounded-lg border-gray-400">
+          <button onClick={toggleOpen} className="border border-xl p-4 rounded-lg border-gray-400 font-medium">
             Select Date Range
           </button>
           {selectedDateRange && selectedDateRange.startDate && selectedDateRange.endDate && (
@@ -103,7 +103,7 @@ const FilterSection = () => {
           renderInput={(params) => <TextField {...params} variant="outlined" />}
           filterSelectedOptions
           defaultValue={launches[0]}
-          style={{ width: '200px' }}
+          style={{ width: '200px', fontWeight : 'medium' }}
         />
       </div>
     </div>
